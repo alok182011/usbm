@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="register.css" />
+    <title>Register</title>
+  </head>
+  <body>
+    <header class="registerHeader"><h2>Register</h2></header>
+    <main class="registerContainer">
+      <form id="registerForm" onsubmit="handleSubmit()">
+        Name: <input type="text" name="name" required /><br /><br />
+        Gender: <input type="radio" value="Male" name="gender" required />
+        <label>Male</label>
+        <input type="radio" value="Female" name="gender" required />
+        <label>Female</label>
+        <input type="radio" value="Other" name="gender" required />
+        <label>Other</label><br /><br />
+        Age: <input type="text" name="age" required /><br /><br />
+        Blood Group:
+        <input type="text" name="bloodGroup" required /><br /><br />
+        Address: <input type="text" name="address" required /><br /><br />
+        Preferred Date:
+        <input type="date" name="preferredDate" required /><br /><br />
+        <input type="submit" value="Register" required /><br /><br />
+      </form>
+    </main>
+    <script>
+      const form = document.getElementById("registerForm");
+      function handleSubmit() {
+        alert(form.elements["gender"].value);
+      }
+    </script>
+  </body>
+</html>

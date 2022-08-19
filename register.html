@@ -10,7 +10,7 @@
   <body>
     <header class="registerHeader"><h2>Register</h2></header>
     <main class="registerContainer">
-      <form id="registerForm" onsubmit="handleSubmit()">
+      <form id="registerForm">
         Name: <input type="text" name="name" required /><br /><br />
         Gender: <input type="radio" value="Male" name="gender" required />
         <label>Male</label>
@@ -24,14 +24,40 @@
         Address: <input type="text" name="address" required /><br /><br />
         Preferred Date:
         <input type="date" name="preferredDate" required /><br /><br />
-        <input type="submit" value="Register" required /><br /><br />
+        <input type="submit" value="Register" /><br /><br />
       </form>
     </main>
     <script>
       const form = document.getElementById("registerForm");
-      function handleSubmit() {
-        alert(form.elements["gender"].value);
-      }
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const url = "http://localhost:8001/api/donor/";
+        const data = {
+          name: form.elements["name"].value,
+          gender: form.elements["gender"].value,
+          age: form.elements["age"].value,
+          bloodGroup: form.elements["bloodGroup"].value,
+          address: form.elements["address"].value,
+          preferredDate: form.elements["preferredDate"].value,
+        };
+        const other_params = {
+          headers: { "content-type": "application/json; charset=UTF-8" },
+          body: JSON.stringify(data),
+          method: "POST",
+          mode: "cors",
+        };
+
+        fetch(url, other_params)
+          .then((response) => {
+            alert("Donor Registered");
+            form.reset();
+          })
+          .catch((err) => {
+            alert("Something went wrong, Please try again.");
+          });
+      });
     </script>
   </body>
 </html>

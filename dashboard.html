@@ -7,6 +7,31 @@
     <title>Dashboard</title>
   </head>
   <body>
-    Dashboard
+    <center><h1>Dashboard</h1></center>
+    <div id="donorList"></div>
+
+    <script>
+      window.onload = async function () {
+        try {
+          const url = "http://localhost:8001/api/donor/all";
+
+          let donors = await fetch(url);
+          donors = await donors.json();
+
+          donors.donors.map((donor) => {
+            document.getElementById("donorList").innerHTML += `
+            <p>
+                Name: ${donor.name}<br/>
+                Age: ${donor.age}<br/>
+                Blood Group: ${donor.bloodGroup}
+            </p>
+            <br/>
+            `;
+          });
+        } catch (err) {
+          console.log(err);
+        }
+      };
+    </script>
   </body>
 </html>
